@@ -1,0 +1,6 @@
+target/
+*.class
+*.log
+.git
+.gitignore
+node_modules
