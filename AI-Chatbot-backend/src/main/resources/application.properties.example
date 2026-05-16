@@ -1,0 +1,9 @@
+spring.application.name=NovaMind
+server.port=8080
+
+groq.api.key=YOUR_GROQ_API_KEY_HERE
+groq.api.url=https://api.groq.com/openai/v1/chat/completions
+groq.model=llama-3.1-8b-instant
+
+spring.servlet.multipart.max-file-size=10MB
+spring.servlet.multipart.max-request-size=10MB
