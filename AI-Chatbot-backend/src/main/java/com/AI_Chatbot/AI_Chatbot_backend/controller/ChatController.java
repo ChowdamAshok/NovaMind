@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/chat")
 @CrossOrigin(origins = {
     "http://localhost:5173",
-    "https://novamind-ruddy.vercel.app/",
-    "*"
+    "https://novamind-ruddy.vercel.app",
+    "https://novamind-yo7s.onrender.com"
 })
 public class ChatController {
 

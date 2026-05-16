@@ -7,7 +7,7 @@ import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import Login from "./Login";
 import Robot from "./Robot";
 
-const API_BASE_URL = "https://novamind-backend.onrender.com";
+const API_BASE_URL = "https://novamind-yo7s.onrender.com";
 
 const CodeBlock = ({ language, children }) => {
   const [copied, setCopied] = useState(false);
