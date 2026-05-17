@@ -264,31 +264,6 @@ The app is now available at `http://localhost:5173`.
 | `server.port` | No | Server port (default: `8080`) |
 | `spring.servlet.multipart.max-file-size` | No | Max upload size (default: `10MB`) |
 
-Example:
-
-```properties
-spring.application.name=NovaMind
-server.port=8080
-
-groq.api.key=your_groq_api_key_here
-groq.api.url=https://api.groq.com/openai/v1/chat/completions
-groq.model=llama-3.1-8b-instant
-
-spring.servlet.multipart.max-file-size=10MB
-spring.servlet.multipart.max-request-size=10MB
-```
-
-### Render — Environment Variables (Production)
-
-When deploying to Render, set these in the **Environment** tab of your service dashboard. Do not include actual values in any committed file.
-
-| Key | Description |
-|---|---|
-| `GROQ_API_KEY` | Your Groq API key |
-| `GROQ_API_URL` | Groq completions endpoint URL |
-| `GROQ_MODEL` | Model identifier for text chat |
-
----
 
 ## API Reference
 
