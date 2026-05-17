@@ -6,7 +6,7 @@
 
 *Powered by Groq · Built with React & Spring Boot · Deployed on Vercel & Render*
 
-[Live Demo](#) &nbsp;·&nbsp; [Report Bug](../../issues) &nbsp;·&nbsp; [Request Feature](../../issues) &nbsp;·&nbsp; [Documentation](#documentation)
+[Live Demo](https://novamind-ruddy.vercel.app/) &nbsp;·&nbsp; [Report Bug](../../issues) &nbsp;·&nbsp; [Request Feature](../../issues) &nbsp;·&nbsp; [Documentation](#documentation)
 
 </div>
 
