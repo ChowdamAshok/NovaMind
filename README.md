@@ -1,112 +1,270 @@
-# 🧠 NovaMind — AI Chatbot
-
 <div align="center">
 
-**A powerful, feature-rich AI chatbot built with React + Spring Boot + Groq AI**
+# NovaMind
 
-[🚀 Live Demo](#) · [🐛 Report Bug](../../issues) · [✨ Request Feature](../../issues)
+### Intelligent AI Chatbot Platform
+
+*Powered by Groq · Built with React & Spring Boot · Deployed on Vercel & Render*
+
+[Live Demo](#) &nbsp;·&nbsp; [Report Bug](../../issues) &nbsp;·&nbsp; [Request Feature](../../issues) &nbsp;·&nbsp; [Documentation](#documentation)
 
 </div>
 
 ---
 
-## ✨ Features
+## Overview
 
-### 🤖 AI Capabilities
-- **Intelligent Conversations** — Powered by Groq's ultra-fast LLaMA models
-- **Image Analysis** — Upload up to 4 images and ask questions about them
-- **PDF Scanner** — Upload PDF documents and get instant answers
-- **Voice to Text** — Speak your questions using Groq Whisper AI
+NovaMind is a full-stack AI chatbot platform that combines the speed of Groq's inference engine with a polished, responsive user interface. It supports multimodal inputs — text, images, PDFs, and voice — making it one of the most feature-complete open-source chatbot implementations available.
 
-### 💬 Chat Experience
-- **Real-time Responses** — Lightning fast answers powered by Groq
-- **Markdown Rendering** — Beautiful formatting for code, tables, and lists
-- **Syntax Highlighting** — Code blocks with language detection and copy button
-- **Chat History** — Save and revisit previous conversations
-- **Auto Scroll** — Automatically scrolls to the latest message
-- **Thinking Animation** — Bouncing dots while AI is processing
-
-### 🎨 UI/UX
-- **Premium Robot Mascot** — Interactive SVG robot that reacts to every action
-- **Eyes Follow Cursor** — Robot eyes track your mouse movement
-- **Dark/Light Mode** — Midnight Emerald dark + Pure Minimalist Emerald light
-- **Mobile Responsive** — Fully optimized for all screen sizes
-- **Smooth Animations** — Professional transitions and micro-interactions
-- **Welcome Screen** — Suggested questions to get started quickly
-
-### 🔐 Security
-- **User Authentication** — Login and Register system
-- **Password Validation** — Secure password requirements
-- **Session Management** — Persistent login state
+The project is structured as a monorepo with a React frontend and a Spring Boot backend, both fully containerized and deployable on free-tier cloud platforms.
 
 ---
 
-## 🛠️ Tech Stack
+## Table of Contents
+
+- [Features](#features)
+- [Architecture](#architecture)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Environment Variables](#environment-variables)
+- [API Reference](#api-reference)
+- [Deployment](#deployment)
+- [Project Structure](#project-structure)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
+
+## Features
+
+### Core AI
+
+| Feature | Description |
+|---|---|
+| **Text Chat** | Conversational AI powered by LLaMA 3.1 via Groq |
+| **Image Analysis** | Upload up to 4 images — ask questions about any of them |
+| **PDF Processing** | Extract and query content from any PDF document |
+| **Voice Input** | Record audio and transcribe using Groq Whisper |
+| **Chat History** | Save, reload, and delete past conversations |
+| **Context Memory** | Full conversation history sent with every request |
+
+### User Interface
+
+| Feature | Description |
+|---|---|
+| **Markdown Rendering** | Full markdown support including tables, lists, and blockquotes |
+| **Syntax Highlighting** | 100+ languages with one-click copy |
+| **Animated Robot Mascot** | SVG robot with cursor-tracking eyes and state-based animations |
+| **Dark / Light Mode** | Midnight Emerald dark theme + Pure Minimalist Emerald light theme |
+| **Mobile Responsive** | Slide-out sidebar, adaptive layout across all screen sizes |
+| **Real-time Feedback** | Thinking animation, timestamps, error messages |
+| **Welcome Screen** | Suggested prompts to help users get started |
+
+### Authentication
+
+| Feature | Description |
+|---|---|
+| **Register** | Create an account with username and password |
+| **Login** | Authenticate with validation and error handling |
+| **Session Persistence** | Stay logged in across page reloads |
+| **Logout** | Clear session and reset state |
+
+---
+
+## Architecture
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                        Client                           │
+│                   React + Vite (Vercel)                 │
+│                                                         │
+│   ┌─────────────┐   ┌──────────────┐   ┌────────────┐  │
+│   │  Chat UI    │   │  Robot SVG   │   │ Auth Pages │  │
+│   │  Markdown   │   │  Animations  │   │ Login/Reg  │  │
+│   │  Highlights │   │  Cursor Track│   │ Validation │  │
+│   └──────┬──────┘   └──────────────┘   └────────────┘  │
+│          │ Axios HTTP                                    │
+└──────────┼──────────────────────────────────────────────┘
+           │
+           ▼
+┌─────────────────────────────────────────────────────────┐
+│                       Backend                           │
+│               Spring Boot 3.x (Render)                  │
+│                                                         │
+│   ┌─────────────────────────────────────────────────┐   │
+│   │              ChatController                     │   │
+│   │  /api/chat  /api/chat/image  /api/chat/pdf      │   │
+│   │  /api/chat/voice  /api/chat/test                │   │
+│   └──────────────────┬──────────────────────────────┘   │
+│                      │                                   │
+│   ┌──────────────────▼──────────────────────────────┐   │
+│   │               GroqService                       │   │
+│   │  chat()  chatWithImage()  chatWithPdf()         │   │
+│   │  transcribeAudio()                              │   │
+│   └──────────────────┬──────────────────────────────┘   │
+│                      │ WebClient (HTTPS)                 │
+└──────────────────────┼──────────────────────────────────┘
+                       │
+                       ▼
+┌─────────────────────────────────────────────────────────┐
+│                    Groq Cloud                           │
+│                                                         │
+│   LLaMA 3.1 8B Instant   →  Text chat                  │
+│   LLaMA 4 Scout 17B      →  Image analysis             │
+│   Whisper Large V3       →  Voice transcription        │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Tech Stack
 
 ### Frontend
-| Technology | Purpose |
-|---|---|
-| React 18 | UI Framework |
-| Vite | Build Tool |
-| Axios | HTTP Client |
-| ReactMarkdown | Markdown Rendering |
-| React Syntax Highlighter | Code Highlighting |
-| CSS3 + Inter Font | Styling & Typography |
+
+| Technology | Version | Purpose |
+|---|---|---|
+| React | 18.x | Component-based UI framework |
+| Vite | 5.x | Build tool and dev server |
+| Axios | latest | HTTP client for API calls |
+| react-markdown | latest | Markdown rendering |
+| react-syntax-highlighter | latest | Code block highlighting |
+| Inter (Google Fonts) | — | Typography |
 
 ### Backend
-| Technology | Purpose |
-|---|---|
-| Spring Boot 3.x | REST API Framework |
-| Spring WebFlux | WebClient for HTTP calls |
-| PDFBox 3.x | PDF text extraction |
-| Lombok | Boilerplate reduction |
-| Java 21 | Runtime |
 
-### AI & Services
-| Service | Purpose |
-|---|---|
-| Groq API | LLaMA 3.1 for chat |
-| Groq Vision | LLaMA 4 Scout for image analysis |
-| Groq Whisper | Voice to text transcription |
+| Technology | Version | Purpose |
+|---|---|---|
+| Spring Boot | 3.x | REST API framework |
+| Spring WebFlux | 7.x | Non-blocking HTTP client |
+| Apache PDFBox | 3.0.1 | PDF text extraction |
+| Lombok | latest | Boilerplate reduction |
+| Java | 21 | Runtime environment |
+| Maven | 3.9.x | Build and dependency management |
 
-### Deployment
-| Platform | Service |
-|---|---|
-| Vercel | Frontend hosting |
-| Render | Backend hosting |
-| GitHub | Source control |
+### AI Models (Groq)
+
+| Model | Purpose | Context |
+|---|---|---|
+| `llama-3.1-8b-instant` | Text conversation | 128K tokens |
+| `meta-llama/llama-4-scout-17b-16e-instruct` | Image analysis | Multimodal |
+| `whisper-large-v3` | Voice transcription | Audio |
+
+### Infrastructure
+
+| Platform | Purpose | Cost |
+|---|---|---|
+| Vercel | Frontend hosting + CDN | Free |
+| Render | Backend hosting (Docker) | Free |
+| GitHub | Source control + CI trigger | Free |
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+
-- Java 21+
-- Maven 3.9+
-- Groq API Key — free at [console.groq.com](https://console.groq.com)
+Ensure you have the following installed:
 
-### 1. Clone the repository
+```
+Node.js    >= 18.0.0
+Java       >= 21.0.0
+Maven      >= 3.9.0
+Git        >= 2.x
+```
+
+You will also need a free Groq API key from [console.groq.com](https://console.groq.com).
+
+---
+
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/NovaMind.git
 cd NovaMind
 ```
 
-### 2. Setup Backend
+---
+
+### 2. Configure the Backend
 
 ```bash
 cd AI-Chatbot-backend
 ```
 
-Create `src/main/resources/application.properties` using the example file:
+Copy the example configuration file:
 
 ```bash
-cp src/main/resources/application.properties.example src/main/resources/application.properties
+# Linux / macOS
+cp src/main/resources/application.properties.example \
+   src/main/resources/application.properties
+
+# Windows
+copy src\main\resources\application.properties.example ^
+     src\main\resources\application.properties
 ```
 
-Fill in your values:
+Open `application.properties` and fill in your values. See [Environment Variables](#environment-variables) for the full list.
+
+> **Important:** `application.properties` is listed in `.gitignore` and will never be committed. Never hardcode secrets in source files.
+
+Start the backend:
+
+```bash
+./mvnw spring-boot:run
+```
+
+The API is now available at `http://localhost:8080`.
+
+Verify with:
+
+```bash
+curl http://localhost:8080/api/chat/test
+# → NovaMind backend is working!
+```
+
+---
+
+### 3. Configure the Frontend
+
+```bash
+cd ../AI-Chatbot-frontend
+npm install
+```
+
+Open `src/App.jsx` and set the API base URL:
+
+```js
+// For local development
+const API_BASE_URL = "http://localhost:8080";
+
+// For production (replace with your Render URL)
+const API_BASE_URL = "https://your-service.onrender.com";
+```
+
+Start the frontend:
+
+```bash
+npm run dev
+```
+
+The app is now available at `http://localhost:5173`.
+
+---
+
+## Environment Variables
+
+### Backend — `application.properties`
+
+| Property | Required | Description |
+|---|---|---|
+| `groq.api.key` | ✅ Yes | API key from [console.groq.com](https://console.groq.com) |
+| `groq.api.url` | ✅ Yes | Groq completions endpoint |
+| `groq.model` | ✅ Yes | Default model for text chat |
+| `server.port` | No | Server port (default: `8080`) |
+| `spring.servlet.multipart.max-file-size` | No | Max upload size (default: `10MB`) |
+
+Example:
 
 ```properties
 spring.application.name=NovaMind
@@ -120,58 +278,207 @@ spring.servlet.multipart.max-file-size=10MB
 spring.servlet.multipart.max-request-size=10MB
 ```
 
-> ⚠️ Never commit your `application.properties` — it is gitignored by default.
+### Render — Environment Variables (Production)
 
-Run the backend:
+When deploying to Render, set these in the **Environment** tab of your service dashboard. Do not include actual values in any committed file.
 
-```bash
-./mvnw spring-boot:run
-```
-
-Backend starts at `http://localhost:8080`
-
-### 3. Setup Frontend
-
-```bash
-cd AI-Chatbot-frontend
-npm install
-npm run dev
-```
-
-Frontend starts at `http://localhost:5173`
+| Key | Description |
+|---|---|
+| `GROQ_API_KEY` | Your Groq API key |
+| `GROQ_API_URL` | Groq completions endpoint URL |
+| `GROQ_MODEL` | Model identifier for text chat |
 
 ---
 
-## 📁 Project Structure
+## API Reference
+
+Base URL: `https://your-backend.onrender.com`
+
+---
+
+### `POST /api/chat`
+
+Send a text message and receive an AI response.
+
+**Request body:**
+```json
+{
+  "messages": [
+    { "role": "system", "content": "You are a helpful assistant." },
+    { "role": "user", "content": "Hello!" }
+  ]
+}
+```
+
+**Response:**
+```json
+{
+  "reply": "Hello! How can I help you today?"
+}
+```
+
+---
+
+### `POST /api/chat/image`
+
+Analyze one or more images with an optional question.
+
+**Request body:**
+```json
+{
+  "base64Images": ["<base64_string>", "<base64_string>"],
+  "imageTypes": ["image/jpeg", "image/png"],
+  "question": "What is in these images?"
+}
+```
+
+**Response:**
+```json
+{
+  "reply": "The first image shows..."
+}
+```
+
+---
+
+### `POST /api/chat/pdf`
+
+Extract text from a PDF and answer questions about it.
+
+**Request body:**
+```json
+{
+  "base64Pdf": "<base64_string>",
+  "question": "Summarize this document."
+}
+```
+
+**Response:**
+```json
+{
+  "reply": "This document covers..."
+}
+```
+
+---
+
+### `POST /api/chat/voice`
+
+Transcribe audio to text using Whisper.
+
+**Request body:**
+```json
+{
+  "base64Audio": "<base64_string>",
+  "mimeType": "audio/webm"
+}
+```
+
+**Response:**
+```json
+{
+  "transcript": "What is the capital of France?"
+}
+```
+
+---
+
+### `GET /api/chat/test`
+
+Health check endpoint.
+
+**Response:**
+```
+NovaMind backend is working!
+```
+
+---
+
+## Deployment
+
+### Backend on Render
+
+1. Sign in to [render.com](https://render.com) with your GitHub account
+2. Click **New +** → **Web Service**
+3. Select your GitHub repository
+4. Configure the service:
+
+```
+Name:            novamind-backend
+Region:          Singapore (or nearest to you)
+Branch:          main
+Root Directory:  AI-Chatbot-backend
+Runtime:         Docker
+Instance Type:   Free
+```
+
+5. Under **Environment**, add the keys listed in [Environment Variables](#environment-variables)
+6. Click **Create Web Service**
+
+Build time is approximately 3–5 minutes. Once live, copy the service URL (e.g. `https://novamind-backend.onrender.com`) and update `API_BASE_URL` in the frontend.
+
+> **Note:** Free tier Render services spin down after 15 minutes of inactivity. The first request after a cold start may take 30–60 seconds.
+
+---
+
+### Frontend on Vercel
+
+1. Sign in to [vercel.com](https://vercel.com) with your GitHub account
+2. Click **New Project** and import your repository
+3. Configure the project:
+
+```
+Root Directory:   AI-Chatbot-frontend
+Framework:        Vite
+Build Command:    npm run build
+Output Directory: dist
+```
+
+4. Click **Deploy**
+
+Vercel automatically redeploys on every push to `main`.
+
+---
+
+## Project Structure
 
 ```
 NovaMind/
-├── AI-Chatbot-backend/
-│   ├── src/main/java/com/AI_Chatbot/AI_Chatbot_backend/
-│   │   ├── controller/
-│   │   │   ├── ChatController.java      # REST endpoints
-│   │   │   └── CorsConfig.java          # CORS configuration
-│   │   ├── model/
-│   │   │   ├── ChatMessage.java         # Message model
-│   │   │   ├── ChatRequest.java         # Request model
-│   │   │   ├── ChatResponse.java        # Response model
-│   │   │   ├── ImageRequest.java        # Image request model
-│   │   │   ├── PdfRequest.java          # PDF request model
-│   │   │   ├── VoiceRequest.java        # Voice request model
-│   │   │   └── VoiceResponse.java       # Voice response model
-│   │   └── service/
-│   │       └── GroqService.java         # AI integration service
-│   ├── Dockerfile                       # Docker config for Render
+│
+├── AI-Chatbot-backend/                  # Spring Boot application
+│   ├── src/
+│   │   └── main/
+│   │       ├── java/com/AI_Chatbot/AI_Chatbot_backend/
+│   │       │   ├── controller/
+│   │       │   │   ├── ChatController.java     # REST API endpoints
+│   │       │   │   └── CorsConfig.java         # CORS configuration
+│   │       │   ├── model/
+│   │       │   │   ├── ChatMessage.java
+│   │       │   │   ├── ChatRequest.java
+│   │       │   │   ├── ChatResponse.java
+│   │       │   │   ├── ImageRequest.java
+│   │       │   │   ├── PdfRequest.java
+│   │       │   │   ├── VoiceRequest.java
+│   │       │   │   └── VoiceResponse.java
+│   │       │   └── service/
+│   │       │       └── GroqService.java        # AI integration layer
+│   │       └── resources/
+│   │           ├── application.properties          # ← gitignored
+│   │           └── application.properties.example  # ← committed template
+│   ├── Dockerfile
+│   ├── .dockerignore
 │   └── pom.xml
 │
-├── AI-Chatbot-frontend/
+├── AI-Chatbot-frontend/                 # React application
 │   ├── src/
-│   │   ├── App.jsx                      # Main chat component
-│   │   ├── App.css                      # Global styles
-│   │   ├── Login.jsx                    # Auth component
-│   │   ├── Login.css                    # Auth styles
-│   │   ├── Robot.jsx                    # SVG robot mascot
-│   │   └── Robot.css                    # Robot animations
+│   │   ├── App.jsx                      # Root component + chat logic
+│   │   ├── App.css                      # Global design system
+│   │   ├── Login.jsx                    # Authentication screens
+│   │   ├── Login.css
+│   │   ├── Robot.jsx                    # Animated SVG mascot
+│   │   ├── Robot.css                    # Mascot animations
+│   │   └── main.jsx                     # React entry point
+│   ├── index.html
 │   └── package.json
 │
 └── README.md
@@ -179,129 +486,109 @@ NovaMind/
 
 ---
 
-## 🌐 API Endpoints
+## Robot Mascot
 
-| Method | Endpoint | Description |
+The NovaMind mascot is a fully custom SVG robot rendered entirely in the browser — no images or external assets required.
+
+| State | Behavior | Trigger |
 |---|---|---|
-| `POST` | `/api/chat` | Send a text message |
-| `POST` | `/api/chat/image` | Analyze images |
-| `POST` | `/api/chat/pdf` | Extract and query PDF |
-| `POST` | `/api/chat/voice` | Transcribe voice to text |
-| `GET` | `/api/chat/test` | Health check |
+| `idle` | Gentle floating loop | App load / after response |
+| `typing` | Excited jumping, arms flailing | User is typing |
+| `thinking` | Slow wobble, eyes shift amber | Waiting for API response |
+| `answer` | Celebration jump, arm wave | Response received |
+| `hover` | Speech bubble appears | Cursor over robot |
+
+Additional behaviors:
+- Eyes track the cursor in real time using trigonometry
+- Automatic blinking every 3 seconds
+- Antenna pulses with a glow effect
+- Chest panel has animated RGB status lights
+- Mouth expression changes per state
 
 ---
 
-## 🚢 Deployment
+## Cost Breakdown
 
-### Backend — Render
+NovaMind is designed to run at zero cost using free tiers.
 
-1. Go to [render.com](https://render.com) and sign in with GitHub
-2. Click **New** → **Web Service**
-3. Connect your GitHub repository
-4. Fill in these settings:
-
-| Field | Value |
-|---|---|
-| Root Directory | `AI-Chatbot-backend` |
-| Runtime | `Docker` |
-| Instance Type | Free |
-
-5. Add these environment variables in the Render dashboard:
-
-| Key | Description |
-|---|---|
-| `GROQ_API_KEY` | Your Groq API key from console.groq.com |
-| `GROQ_API_URL` | Groq completions endpoint URL |
-| `GROQ_MODEL` | The LLM model name to use |
-
-6. Click **Create Web Service** and wait 3-5 minutes
-
-### Frontend — Vercel
-
-1. Go to [vercel.com](https://vercel.com) and sign in with GitHub
-2. Click **New Project** and import your repository
-3. Fill in these settings:
-
-| Field | Value |
-|---|---|
-| Root Directory | `AI-Chatbot-frontend` |
-| Framework | `Vite` |
-| Build Command | `npm run build` |
-| Output Directory | `dist` |
-
-4. Click **Deploy** and wait 2 minutes
-5. Update `API_BASE_URL` in `App.jsx` with your Render backend URL
-
----
-
-## 🤖 Robot Mascot States
-
-| State | Animation | Trigger |
+| Service | Free Tier Limits | Suitable For |
 |---|---|---|
-| `idle` | Floating up and down | Default |
-| `typing` | Excited jumping | User typing |
-| `thinking` | Wobbling | Waiting for AI |
-| `answer` | Celebrating | AI responded |
-| `hover` | Says "Hey there! 👋" | Mouse hover |
+| Groq API | ~500K tokens/day | Personal + small team use |
+| Render | 750 hrs/month, 512MB RAM | Single backend service |
+| Vercel | 100GB bandwidth/month | Frontend hosting |
+| GitHub | Unlimited public repos | Source control |
+
+**Total monthly cost: $0**
 
 ---
 
-## 🆓 Cost
+## Roadmap
 
-**NovaMind is completely free to run!**
+The following features are planned for future releases:
 
-| Service | Cost |
-|---|---|
-| Groq API | Free tier — 500K tokens/day |
-| Render | Free tier |
-| Vercel | Free tier |
-| GitHub | Free |
-
----
-
-## 🛣️ Roadmap
-
-- [ ] MySQL database for persistent chat history
-- [ ] JWT authentication
-- [ ] Multiple AI model selection
-- [ ] Export chat as PDF
-- [ ] Mobile app with React Native
+- [ ] Persistent chat storage with MySQL / PostgreSQL
+- [ ] JWT-based authentication with refresh tokens
+- [ ] Selectable AI models from the UI
+- [ ] Streaming responses (token-by-token output)
+- [ ] Export conversation as PDF or Markdown
+- [ ] Multi-language support (i18n)
+- [ ] React Native mobile application
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
-Contributions are welcome!
+Contributions of any kind are welcome. To contribute:
 
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+1. Fork the repository
+2. Create a feature branch
+
+```bash
+git checkout -b feature/your-feature-name
+```
+
+3. Commit your changes with a clear message
+
+```bash
+git commit -m "feat: add streaming response support"
+```
+
+4. Push and open a pull request
+
+```bash
+git push origin feature/your-feature-name
+```
+
+Please follow the existing code style and include relevant comments where appropriate.
 
 ---
 
-## 📄 License
+## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for full details.
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgements
 
-- [Groq](https://groq.com) — For the blazing fast AI inference
-- [React](https://react.dev) — For the amazing UI framework
-- [Spring Boot](https://spring.io) — For the robust backend framework
-- [PDFBox](https://pdfbox.apache.org) — For PDF processing
-- [Vercel](https://vercel.com) — For seamless frontend deployment
-- [Render](https://render.com) — For easy backend deployment
+This project builds on the following open-source projects and services:
+
+- [Groq](https://groq.com) — Ultra-fast LLM inference
+- [React](https://react.dev) — UI component framework
+- [Spring Boot](https://spring.io/projects/spring-boot) — Java backend framework
+- [Apache PDFBox](https://pdfbox.apache.org) — PDF processing library
+- [Vite](https://vitejs.dev) — Frontend build tool
+- [react-markdown](https://github.com/remarkjs/react-markdown) — Markdown renderer
+- [react-syntax-highlighter](https://github.com/react-syntax-highlighter/react-syntax-highlighter) — Code highlighting
+- [Vercel](https://vercel.com) — Frontend deployment
+- [Render](https://render.com) — Backend deployment
 
 ---
 
 <div align="center">
 
-**Built with ❤️ using React + Spring Boot + Groq AI**
+Built with React · Spring Boot · Groq AI
 
-⭐ If you found this project helpful, please give it a star!
+If this project was useful to you, consider giving it a ⭐
 
 </div>
